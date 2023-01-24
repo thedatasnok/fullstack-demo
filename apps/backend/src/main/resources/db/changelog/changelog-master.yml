@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: define-base-tables
+      author: thedatasnok
+      changes:
+        - sqlFile:
+            path: db/changelog/1.0.0/add-user-table.sql
+            relativeToChangelogFile: false
