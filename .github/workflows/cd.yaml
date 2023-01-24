@@ -28,11 +28,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-
       - run: ./gradlew :apps:backend:jib --image=ghcr.io/thedatasnok/fullstack-demo-backend:latest
 
-      - run: ./gradlew :apps:backend:jib --image=ghcr.io/thedatasnok/fullstack-demo-backend:${{ env.RELEASE_VERSION }}
+      - run: ./gradlew :apps:backend:jib --image=ghcr.io/thedatasnok/fullstack-demo-backend:${{ github.ref_name }}
 
 
   build-push-frontend:
@@ -52,8 +50,6 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - run: cd apps/frontend
-      
-      - run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
       - uses: docker/build-push-action@v3
         with:
@@ -61,7 +57,7 @@ jobs:
           push: true
           tags: |
             ghcr.io/thedatasnok/fullstack-demo-frontend:latest
-            ghcr.io/thedatasnok/fullstack-demo-frontend:${{ env.RELEASE_VERSION }}
+            ghcr.io/thedatasnok/fullstack-demo-frontend:${{ github.ref_name }}
 
 
   # TODO: uncomment whenever app module is defined properly
