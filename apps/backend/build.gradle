@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.0.2'
 	id 'io.spring.dependency-management' version '1.1.0'
+  id 'com.google.cloud.tools.jib' version '3.3.1'
 }
 
 group = 'cool.datasnok.samples'
@@ -34,4 +35,18 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+jib {
+  to {
+    image = 'ghcr.io/thedatasnok/fullstack-demo-backend'
+  }
+  container {
+    ports = ['8080']
+    labels = [
+      'org.opencontainers.image.source': 'https://github.com/thedatasnok/fullstack-demo',
+      'org.opencontainers.image.description': 'Demonstration backend',
+      'org.opencontainers.licenses': 'MIT'
+    ]
+  }
 }
