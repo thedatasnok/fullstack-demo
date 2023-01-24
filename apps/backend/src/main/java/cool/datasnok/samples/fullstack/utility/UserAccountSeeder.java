@@ -1,5 +1,6 @@
 package cool.datasnok.samples.fullstack.utility;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import cool.datasnok.samples.fullstack.model.UserAccount;
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class UserAccountSeeder {
   private final UserAccountRepository userAccountRepository;
+  private final PasswordEncoder passwordEncoder;
 
   private static final Long USER_ACCOUNT_ID = 1L;
 
@@ -20,7 +22,7 @@ public class UserAccountSeeder {
   void seedUsers() {
     if (this.userAccountRepository.existsById(USER_ACCOUNT_ID)) return;
     
-    var encodedPassword = "admin"; // TODO: Encode password using BCrypt
+    var encodedPassword = this.passwordEncoder.encode("admin"); // NOSONAR
     var savedUser = this.userAccountRepository.save(new UserAccount("admin", encodedPassword, "admin@invalid.tld"));
 
     log.info("Saved user account with ID: {}", savedUser.getId());
