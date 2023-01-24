@@ -3,11 +3,11 @@ provider "kubernetes" {
 }
 
 module "core" {
-  source = "./modules/core"
+  source           = "./modules/core"
   environment_name = var.environment_name
 }
 
 module "app" {
-  source = "./modules/app"
+  source    = "./modules/app"
   namespace = module.core.namespace
 }
