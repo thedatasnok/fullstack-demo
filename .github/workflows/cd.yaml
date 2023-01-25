@@ -64,20 +64,27 @@ jobs:
             ghcr.io/thedatasnok/fullstack-demo-frontend:${{ github.ref_name }}
 
 
-  # TODO: uncomment whenever app module is defined properly
-  # deploy-stack:
-  #   name: Deploy stack to staging
-  #   runs-on: ubuntu-latest
-  #   needs: 
-  #     - build-push-backend
-  #     - build-push-frontend
-  #   environment: staging
-  #   steps:
-  #     - uses: actions/checkout@v3
+  deploy-stack-staging:
+    name: Deploy stack to staging
+    runs-on: ubuntu-latest
+    needs: 
+      - build-push-backend
+      - build-push-frontend
+    environment: staging
+    steps:
+      - uses: actions/checkout@v3
 
-  #     - run: cd infrastructure
+      - run: cd infrastructure
 
-  #     - uses: hashicorp/setup-terraform@v2
+      - uses: hashicorp/setup-terraform@v2
 
-  #     - run: terraform apply -target=module.app -var="environment_name=${{ var.ENVIRONMENT_NAME }},environment_url=${{ var.ENVIRONMENT_URL }}"
+      - uses: azure/setup-kubectl@v3
+
+      - uses: azure/k8s-set-context@v3
+        with:
+          method: service-account
+          k8s-url: ${{ var.K8S_API_URL }}
+          k8s-secret: ${{ secrets.K8S_SECRET }}
+
+      - run: terraform apply -target=module.app -var="namespace=${{ var.NAMESPACE }},hostname=${{ var.HOSTNAME }},cluster_issuer=${{ var.CLUSTER_ISSUER }},app_version=${{ github.ref_name }}"
 
