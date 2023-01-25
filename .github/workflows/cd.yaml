@@ -28,9 +28,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: ./gradlew :apps:backend:jib --image=ghcr.io/thedatasnok/fullstack-demo-backend:latest
+      - run: gradle :apps:backend:jib --image=ghcr.io/thedatasnok/fullstack-demo-backend:latest
 
-      - run: ./gradlew :apps:backend:jib --image=ghcr.io/thedatasnok/fullstack-demo-backend:${{ github.ref_name }}
+      - run: gradle :apps:backend:jib --image=ghcr.io/thedatasnok/fullstack-demo-backend:${{ github.ref_name }}
 
 
   build-push-frontend:
@@ -49,11 +49,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: cd apps/frontend
-
       - uses: docker/build-push-action@v3
         with:
-          context: .
+          context: apps/frontend
           push: true
           tags: |
             ghcr.io/thedatasnok/fullstack-demo-frontend:latest
