@@ -30,7 +30,7 @@ resource "kubernetes_deployment" "backend_deployment" {
       }
       spec {
         container {
-          image = concat("ghcr.io/thedatasnok/fullstack-demo-backend:", var.version)
+          image = concat("ghcr.io/thedatasnok/fullstack-demo-backend:", var.app_version)
           name  = "backend-container"
           port {
             container_port = 8080
@@ -61,7 +61,7 @@ resource "kubernetes_deployment" "frontend_deployment" {
       }
       spec {
         container {
-          image = concat("ghcr.io/thedatasnok/fullstack-demo-frontend:", var.version)
+          image = concat("ghcr.io/thedatasnok/fullstack-demo-frontend:", var.app_version)
           name  = "frontend-container"
           port {
             container_port = 80
@@ -113,7 +113,7 @@ resource "kubernetes_ingress" "ingress" {
     name      = "ingress"
     namespace = var.namespace
     annotations = {
-      "cert.manager.io/cluster-issuer" = var.cluster_issuer
+      "cert.manager.io/cluster-issuer"               = var.cluster_issuer
       "nginx.ingress.kubernetes.io/backend-protocol" = "HTTP"
     }
   }

@@ -3,7 +3,7 @@ variable "namespace" {
   description = "The namespace to deploy the app to."
 }
 
-variable "version" {
+variable "app_version" {
   type        = string
   description = "The version of the app to deploy."
 }
