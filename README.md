@@ -17,6 +17,27 @@ If you have feedback or suggestions, please feel free to open an issue or a pull
 └───infrastructure
 ```
 
+## Releasing a new version
+
+1. Change the backend version in the [build.gradle](apps/backend/build.gradle) file
+
+2. Change the frontend version in the [package.json](apps/frontend/package.json) file
+
+3. Stage and commit the changes to git
+
+4. Tag the previous commit with a version number (e.g. `v1.0.0`)
+
+```
+git tag -a v1.0.0 -m "Release version v1.0.0"
+```
+
+5. Push the changes to GitHub, including tags using:
+
+```bash
+git push
+git push --tags
+```
+
 ## Creating a new environment
 
 The terraform code is split into two modules, in which the `core` module is expected to be run manually as it involves creating a namespace for the environment and a workflow service account to use for pipelines. The Service Account role is rather permissive, and could probably be reduced to only the required permissions. 
