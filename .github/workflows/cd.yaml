@@ -9,6 +9,9 @@ jobs:
   build-push-backend:
     name: Build and push backend docker image
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+
     steps:
       - uses: actions/checkout@v3
 
@@ -36,6 +39,9 @@ jobs:
   build-push-frontend:
     name: Build and push frontend docker image
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+
     steps:
       - uses: actions/checkout@v3
 
