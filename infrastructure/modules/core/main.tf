@@ -41,6 +41,7 @@ resource "kubernetes_role_binding" "service_account_role_binding" {
 }
 
 resource "kubernetes_secret" "service_account_token" {
+  type = "kubernetes.io/service-account-token"
   metadata {
     name      = "workflows-sa-token"
     namespace = kubernetes_namespace.k8s_ns.metadata.0.name
