@@ -8,6 +8,5 @@ module "core" {
 }
 
 module "app" {
-  source    = "./modules/app"
-  namespace = module.core.namespace
+  source = "./modules/app"
 }
