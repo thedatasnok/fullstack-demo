@@ -74,7 +74,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - uses: ./.github/actions/deploy-stack.yaml
+      - uses: ./.github/actions/deploy-stack
         with: 
           k8s-url: ${{ vars.K8S_API_URL }}
           k8s-secret: ${{ secrets.K8S_SECRET }}

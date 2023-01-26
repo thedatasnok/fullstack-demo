@@ -30,6 +30,7 @@ runs:
   using: composite
   steps:
     - run: cd infrastructure
+      shell: bash
 
     - uses: hashicorp/setup-terraform@v2
 
@@ -42,3 +43,4 @@ runs:
         k8s-secret: ${{ inputs.k8s-secret }}
 
     - run: terraform apply -var="namespace=${{ inputs.namespace }},hostname=${{ inputs.hostname }},cluster_issuer=${{ inputs.cluster-issuer }},app_version=${{ inputs.app-version }}"
+      shell: bash
