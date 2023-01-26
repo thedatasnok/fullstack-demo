@@ -13,7 +13,7 @@ import cool.datasnok.samples.fullstack.dto.SignInResponse;
 import cool.datasnok.samples.fullstack.dto.UserProfile;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/v1/auth")
 public class AuthController {
   
   @PostMapping("/sign-in")
