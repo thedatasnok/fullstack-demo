@@ -1,0 +1,43 @@
+# This file is maintained automatically by "terraform init".
+# Manual edits may be lost in future updates.
+
+provider "registry.terraform.io/hashicorp/kubernetes" {
+  version = "2.17.0"
+  hashes = [
+    "h1:Nu0bV0ehFE3aiAl8+qxBCxi8u+dfjvvhoQOW30rFGPo=",
+    "zh:1cbafea8c404195d8ad2490d75dbeebef131563d3e38dec87231ceb3923a3012",
+    "zh:26d9584423ee77e607999b082de7d9dc3e937934aa83341e0832e7253caf4f51",
+    "zh:333527fc15fb43bbf1898a2f058598c596468a01d88c415627bb617878dc4d4d",
+    "zh:391b8c80e3115af485977d6e949d7260b7fc0b641089b884256bfd36a7077db2",
+    "zh:4d18ba55247486181759d60195777945bcd68e17ccd980820ca18e8a8b94aeb5",
+    "zh:607ae94d85d1c1ed3845bd71095daadea4b2468e16f57fa05c98eab0de6b14ae",
+    "zh:95c6cf22f8ef14e7a4f85e33cff5d6f11056c7880041b71d425d1b5ebbe246e7",
+    "zh:b077edcedb46a313b461ac1e49317872063b3871f2acbe1a50498612cefff387",
+    "zh:c6a7891683e44148b0c928fd4748b7abac727266ab551d679015f5fe8b72d1e6",
+    "zh:e5cebfdf873770c37a4304362003d3fea8d6c2fd819663ad121bc65bb81e4738",
+    "zh:f569b65999264a9416862bca5cd2a6177d94ccb0424f3a4ef424428912b9cb3c",
+    "zh:feb19269e7c0de473ad412b37818b48da0cc91e5c93dd4c77a72676ca97a16b1",
+  ]
+}
+
+provider "registry.terraform.io/integrations/github" {
+  version     = "5.16.0"
+  constraints = "~> 5.0"
+  hashes = [
+    "h1:xebh90P7b/KUf8c4+cS6/5/XZAvgli8yCtgVwIO8dgQ=",
+    "zh:20a45f6c1357d8a1b726cc5fc8ef378c5e23a2ad5d026b3651cc5ab34f5ff9c0",
+    "zh:2919c4668cd228aa7e4ded95ec20c096fa7e24d4cc4064d3272d82fd4a50d9ab",
+    "zh:34cb04867ef426949df07783c8b6df97a72c35e8c44e5a5b448740f655cd7873",
+    "zh:3e0badfaafe19c6b2977ae7547183456069db9ed6d4591d28b974de5ac0d5b19",
+    "zh:3fd8c542cf0809431f8a858470393d0bcbb91e4052507ce634013186c40adde3",
+    "zh:4417892683144b6bbc1f713bf33d7f20ddce0f99f746a020fe60b0ce577f4504",
+    "zh:4c9f1e244940f409fb391ce9fc71d1acaef421c0e25f6a68e7d7d77fba80f62e",
+    "zh:53b02d4b1b6ad4bd238c27b62db3cacdaec10c320589c5b7d7e04a58147880e3",
+    "zh:8cba8ee1c6301347089aa3a4d9b9d0c7e1c7a71246416dca53f07664ef1c77c8",
+    "zh:98fd5b25b5f59b6268706ba6202c42c0ec97e25a5dc9428a21640aa1fb865d24",
+    "zh:a152cac377a4e318c830f807035449645209b42079f315bf19a6e3b1f6e66b61",
+    "zh:b2f9983fa7d39c9558796064bdabb5db7678c31ec22b406df4fb843e541fd617",
+    "zh:f3d46295fc71570f69f802782a020950d97e0a5ae55f0795e6a78f7b7d58fdd1",
+    "zh:fbdcfbab455a8bf76e5c4aa84a63a3eab99f6db50aea7ed2062486abac2633e2",
+  ]
+}

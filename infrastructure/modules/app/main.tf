@@ -30,7 +30,7 @@ resource "kubernetes_deployment" "backend_deployment" {
       }
       spec {
         container {
-          image = concat("ghcr.io/thedatasnok/fullstack-demo-backend:", var.app_version)
+          image = format("ghcr.io/thedatasnok/fullstack-demo-backend:%s", var.app_version)
           name  = "backend-container"
           port {
             container_port = 8080
@@ -61,7 +61,7 @@ resource "kubernetes_deployment" "frontend_deployment" {
       }
       spec {
         container {
-          image = concat("ghcr.io/thedatasnok/fullstack-demo-frontend:", var.app_version)
+          image = format("ghcr.io/thedatasnok/fullstack-demo-frontend:%s", var.app_version)
           name  = "frontend-container"
           port {
             container_port = 80
