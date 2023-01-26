@@ -40,18 +40,19 @@ git push --tags
 
 ## Creating a new environment
 
-The terraform code is split into two modules, in which the `core` module is expected to be run manually as it involves creating a namespace for the environment and a workflow service account to use for pipelines. The Service Account role is rather permissive, and could probably be reduced to only the required permissions. 
+The terraform code is split into two parts, in which the `environment` part is expected to be run manually as it involves creating a namespace for the environment and a workflow service account to use for pipelines. The Service Account role is rather permissive, and could probably be reduced to only the required permissions. It also creates the Environment in GitHub, and adds the Service Account Token as a secret. 
 
 You can create a new environment by running the following command: 
 
 ```bash
-terraform apply -target=module.core -var="environment_name=<env_name>"
+cd infrastructure/environment
+terraform apply -var="environment_name=<env_name>,github_token=<github_token>"
 ```
 
 Terraform uses the current context in your `~/.kube/config` file to determine which cluster to make changes to, make sure it's the correct one and that you have the necessary permissions. 
 
 
-The `app` module is expected to be run automatically by a pipeline, and will create the remaining resources for the environment. 
+The other part of terraform is expected to be run automatically by a pipeline, and will create application related resources resources for the environment. 
 In this demonstration that includes: a Spring Boot app and a React App.
 
 ## License
