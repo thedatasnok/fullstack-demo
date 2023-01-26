@@ -1,0 +1,12 @@
+name: Manual deploy
+
+on:
+  workflow_dispatch:
+env:
+  env_var: ${{ vars.ENV_CONTEXT_VAR }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'win'
