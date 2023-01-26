@@ -72,19 +72,11 @@ jobs:
       - build-push-frontend
     environment: staging
     steps:
-      - uses: actions/checkout@v3
-
-      - run: cd infrastructure
-
-      - uses: hashicorp/setup-terraform@v2
-
-      - uses: azure/setup-kubectl@v3
-
-      - uses: azure/k8s-set-context@v3
-        with:
-          method: service-account
+      - uses: ./.github/actions/deploy-stack.yaml
+        with: 
           k8s-url: ${{ var.K8S_API_URL }}
           k8s-secret: ${{ secrets.K8S_SECRET }}
-
-      - run: terraform apply -target=module.app -var="namespace=${{ var.NAMESPACE }},hostname=${{ var.HOSTNAME }},cluster_issuer=${{ var.CLUSTER_ISSUER }},app_version=${{ github.ref_name }}"
-
+          namespace: ${{ var.NAMESPACE }}
+          hostname: ${{ var.HOSTNAME }}
+          cluster-issuer: ${{ var.CLUSTER_ISSUER }}
+          app-version: ${{ github.ref_name }}

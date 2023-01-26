@@ -1,0 +1,46 @@
+name: Deploy a stack to an environment
+description: Deploys the stack to an environment using a set of parameters describing the environment
+
+inputs:
+  k8s-url:
+    description: URL to the Kubernetes API server to use for 
+    required: true
+
+  k8s-secret: 
+    description: Service Account Token to use for deploying the stack
+    required: true
+
+  namespace: 
+    description: The namespace in Kubernetes to deploy the stack in
+    required: true
+
+  hostname: 
+    description: The public facing hostname (FQDN) the stack should be published at
+    required: true
+
+  cluster-issuer:
+    description: The ClusterIssuer to use in Kubernetes (powered by cert-manager)
+    required: true
+
+  app-version:
+    description: The version of the application to deploy
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v3
+
+    - run: cd infrastructure
+
+    - uses: hashicorp/setup-terraform@v2
+
+    - uses: azure/setup-kubectl@v3
+
+    - uses: azure/k8s-set-context@v3
+      with:
+        method: service-account
+        k8s-url: ${{ inputs.k8s-url }}
+        k8s-secret: ${{ inputs.k8s-secret }}
+
+    - run: terraform apply -var="namespace=${{ inputs.namespace }},hostname=${{ inputs.hostname }},cluster_issuer=${{ inputs.cluster-issuer }},app_version=${{ inputs.app-version }}"
