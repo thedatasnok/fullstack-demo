@@ -29,9 +29,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - run: cd infrastructure
-      shell: bash
-
     - uses: hashicorp/setup-terraform@v2
 
     - uses: azure/setup-kubectl@v3
@@ -42,5 +39,7 @@ runs:
         k8s-url: ${{ inputs.k8s-url }}
         k8s-secret: ${{ inputs.k8s-secret }}
 
-    - run: terraform apply -var="namespace=${{ inputs.namespace }},hostname=${{ inputs.hostname }},cluster_issuer=${{ inputs.cluster-issuer }},app_version=${{ inputs.app-version }}"
+    - run: |
+        cd infrastructure
+        terraform apply -var="namespace=${{ inputs.namespace }}" -var="hostname=${{ inputs.hostname }}" -var="cluster_issuer=${{ inputs.cluster-issuer }}" -var="app_version=${{ inputs.app-version }}"
       shell: bash
