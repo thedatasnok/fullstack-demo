@@ -43,7 +43,7 @@ runs:
         cd infrastructure
         terraform init
         terraform apply -auto-approve \
-          -var="kubeconfig_path=$KUBECONFIG"
+          -var="kubeconfig_path=$KUBECONFIG" \
           -var="namespace=${{ inputs.namespace }}" \
           -var="hostname=${{ inputs.hostname }}" \
           -var="cluster_issuer=${{ inputs.cluster-issuer }}" \
