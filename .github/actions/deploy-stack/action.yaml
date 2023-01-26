@@ -41,5 +41,6 @@ runs:
 
     - run: |
         cd infrastructure
+        terraform init
         terraform apply -var="namespace=${{ inputs.namespace }}" -var="hostname=${{ inputs.hostname }}" -var="cluster_issuer=${{ inputs.cluster-issuer }}" -var="app_version=${{ inputs.app-version }}"
       shell: bash
