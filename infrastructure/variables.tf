@@ -1,3 +1,9 @@
+variable "kubeconfig_path" {
+  type        = string
+  description = "The path to the kubeconfig file to use for the Kubernetes provider."
+  default     = "~/.kube/config"
+}
+
 variable "namespace" {
   type        = string
   description = "The namespace to deploy the app to."
