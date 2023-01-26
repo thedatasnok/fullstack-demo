@@ -108,7 +108,7 @@ resource "kubernetes_service" "frontend_service" {
 
 # - INGRESS
 
-resource "kubernetes_ingress" "ingress" {
+resource "kubernetes_ingress_v1" "ingress" {
   metadata {
     name      = "ingress"
     namespace = var.namespace
@@ -124,15 +124,23 @@ resource "kubernetes_ingress" "ingress" {
         path {
           path = "/"
           backend {
-            service_name = kubernetes_service.frontend_service.metadata[0].name
-            service_port = kubernetes_service.frontend_service.spec[0].port[0].port
+            service {
+              name = kubernetes_service.frontend_service.metadata[0].name
+              port {
+                number = kubernetes_service.frontend_service.spec[0].port[0].port
+              }
+            }
           }
         }
         path {
           path = "/api"
           backend {
-            service_name = kubernetes_service.backend_service.metadata[0].name
-            service_port = kubernetes_service.backend_service.spec[0].port[0].port
+            service {
+              name = kubernetes_service.backend_service.metadata[0].name
+              port {
+                number = kubernetes_service.backend_service.spec[0].port[0].port
+              }
+            }
           }
         }
       }
