@@ -74,9 +74,9 @@ jobs:
     steps:
       - uses: ./.github/actions/deploy-stack.yaml
         with: 
-          k8s-url: ${{ var.K8S_API_URL }}
+          k8s-url: ${{ vars.K8S_API_URL }}
           k8s-secret: ${{ secrets.K8S_SECRET }}
-          namespace: ${{ var.NAMESPACE }}
-          hostname: ${{ var.HOSTNAME }}
-          cluster-issuer: ${{ var.CLUSTER_ISSUER }}
+          namespace: ${{ vars.NAMESPACE }}
+          hostname: ${{ vars.HOSTNAME }}
+          cluster-issuer: ${{ vars.CLUSTER_ISSUER }}
           app-version: ${{ github.ref_name }}
