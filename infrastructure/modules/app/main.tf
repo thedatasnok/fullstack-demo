@@ -4,7 +4,8 @@
 */
 
 locals {
-  app_selector = "fullstack-demo"
+  backend_selector = "fullstack-demo-backend"
+  frontend_selector = "fullstack-demo-frontend"
 }
 
 # - DEPLOYMENTS
@@ -19,13 +20,13 @@ resource "kubernetes_deployment" "backend_deployment" {
     replicas = 1
     selector {
       match_labels = {
-        app = local.app_selector
+        app = local.backend_selector
       }
     }
     template {
       metadata {
         labels = {
-          app = local.app_selector
+          app = local.backend_selector
         }
       }
       spec {
@@ -50,13 +51,13 @@ resource "kubernetes_deployment" "frontend_deployment" {
     replicas = 1
     selector {
       match_labels = {
-        app = local.app_selector
+        app = local.frontend_selector
       }
     }
     template {
       metadata {
         labels = {
-          app = local.app_selector
+          app = local.frontend_selector
         }
       }
       spec {
@@ -81,7 +82,7 @@ resource "kubernetes_service" "backend_service" {
   }
   spec {
     selector = {
-      app = local.app_selector
+      app = local.backend_selector
     }
     port {
       port        = 8080
@@ -97,7 +98,7 @@ resource "kubernetes_service" "frontend_service" {
   }
   spec {
     selector = {
-      app = local.app_selector
+      app = local.frontend_selector
     }
     port {
       port        = 80
@@ -122,7 +123,8 @@ resource "kubernetes_ingress_v1" "ingress" {
       host = var.hostname
       http {
         path {
-          path = "/"
+          path      = "/"
+          path_type = "Prefix"
           backend {
             service {
               name = kubernetes_service.frontend_service.metadata[0].name
@@ -133,7 +135,8 @@ resource "kubernetes_ingress_v1" "ingress" {
           }
         }
         path {
-          path = "/api"
+          path      = "/api"
+          path_type = "Prefix"
           backend {
             service {
               name = kubernetes_service.backend_service.metadata[0].name
