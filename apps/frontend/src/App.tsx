@@ -4,7 +4,7 @@ import './App.css';
 const App = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [response, setResponse] = useState<Response>();
+  const [response, setResponse] = useState<string>();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -18,7 +18,9 @@ const App = () => {
         username,
         password,
       }),
-    }).then((res) => setResponse(res));
+    })
+      .then((res) => res.json())
+      .then((json) => setResponse(JSON.stringify(json, null, 2)));
   };
 
   return (
@@ -44,9 +46,7 @@ const App = () => {
         <button type='submit'>Sign in</button>
       </form>
 
-      <pre>
-        {response ? JSON.stringify(response.body, null, 2) : 'no response'}
-      </pre>
+      <pre>{response ?? 'no response'}</pre>
     </div>
   );
 };
