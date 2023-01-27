@@ -11,6 +11,9 @@ const App = () => {
 
     fetch('/api/v1/auth/sign-in', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
         username,
         password,
@@ -42,7 +45,7 @@ const App = () => {
       </form>
 
       <pre>
-        {response ? JSON.stringify(response.json(), null, 2) : 'no response'}
+        {response ? JSON.stringify(response.body, null, 2) : 'no response'}
       </pre>
     </div>
   );
