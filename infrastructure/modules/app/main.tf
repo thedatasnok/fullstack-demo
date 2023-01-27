@@ -4,7 +4,7 @@
 */
 
 locals {
-  backend_selector = "fullstack-demo-backend"
+  backend_selector  = "fullstack-demo-backend"
   frontend_selector = "fullstack-demo-frontend"
 }
 
@@ -114,7 +114,7 @@ resource "kubernetes_ingress_v1" "ingress" {
     name      = "ingress"
     namespace = var.namespace
     annotations = {
-      "cert.manager.io/cluster-issuer"               = var.cluster_issuer
+      "cert-manager.io/cluster-issuer"               = var.cluster_issuer
       "nginx.ingress.kubernetes.io/backend-protocol" = "HTTP"
     }
   }
