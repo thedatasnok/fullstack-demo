@@ -3,7 +3,7 @@ name: Release to GitHub
 on:
   push:
     tags:
-      - v*.*.*
+      - '*.*.*'
 
 jobs:
   build-push-backend:
@@ -31,9 +31,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: gradle :apps:backend:jib --image=ghcr.io/thedatasnok/fullstack-demo-backend:latest
-
-      - run: gradle :apps:backend:jib --image=ghcr.io/thedatasnok/fullstack-demo-backend:${{ github.ref_name }}
+      - run: gradle :apps:backend:jib
 
 
   build-push-frontend:
