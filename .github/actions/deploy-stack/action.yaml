@@ -37,7 +37,7 @@ runs:
       with:
         method: service-account
         k8s-url: ${{ inputs.k8s-url }}
-        k8s-secret: ${{ inputs.k8s-secret }}
+        token: ${{ inputs.k8s-secret }}
 
     - run: |
         cd infrastructure
