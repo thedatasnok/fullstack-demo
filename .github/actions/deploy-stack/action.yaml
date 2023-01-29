@@ -46,7 +46,7 @@ runs:
         token: ${{ inputs.github-token }}
 
     - run: |
-        helm install \
+        helm install ${{ inputs.namespace}} ./helm \
           --namespace ${{ inputs.namespace }} \
           --set host=${{ inputs.hostname }} \
           --set clusterIssuer=${{ inputs.cluster-issuer }} \
