@@ -46,7 +46,7 @@ runs:
         token: ${{ inputs.github-token }}
 
     - run: |
-        sudo ln -s /etc/ssl/certs/ca-certificates.crt /usr/local/ssl/cert.pem
+        sudo update-ca-certificates
         helm install ${{ inputs.namespace}} ./helm \
           --namespace ${{ inputs.namespace }} \
           --set host=${{ inputs.hostname }} \
