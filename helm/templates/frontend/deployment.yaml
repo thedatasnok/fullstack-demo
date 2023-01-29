@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "frontend.name" . }}
+  labels:
+    {{ include "chart.labels" . }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ include "frontend.name" . }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ include "frontend.name" . }}
+    spec:
+      containers:
+      - name: {{ include "frontend.name" . }}
+        image: "ghcr.io/thedatasnok/fullstack-demo-frontend:{{ .Values.version }}"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
