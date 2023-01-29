@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'cool.datasnok.samples'
-version = '0.16.0'
+version = '0.17.0'
 sourceCompatibility = '17'
 
 configurations {
