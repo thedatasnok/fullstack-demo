@@ -80,3 +80,4 @@ jobs:
           hostname: ${{ vars.HOSTNAME }}
           cluster-issuer: ${{ vars.CLUSTER_ISSUER }}
           app-version: ${{ github.ref_name }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}

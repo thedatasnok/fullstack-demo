@@ -10,6 +10,10 @@ inputs:
     description: Service Account Token to use for deploying the stack
     required: true
 
+  github-token:
+    description: GitHub token to prevent being rate limited when setting up Helm
+    required: true
+
   namespace: 
     description: The namespace in Kubernetes to deploy the stack in
     required: true
@@ -29,8 +33,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: hashicorp/setup-terraform@v2
-
     - uses: azure/setup-kubectl@v3
 
     - uses: azure/k8s-set-context@v3
@@ -39,13 +41,14 @@ runs:
         k8s-url: ${{ inputs.k8s-url }}
         k8s-secret: ${{ inputs.k8s-secret }}
 
+    - uses: azure/setup-helm@v3
+      with:
+        token: ${{ inputs.github-token }}
+
     - run: |
-        cd infrastructure
-        terraform init
-        terraform apply -auto-approve \
-          -var="kubeconfig_path=$KUBECONFIG" \
-          -var="namespace=${{ inputs.namespace }}" \
-          -var="hostname=${{ inputs.hostname }}" \
-          -var="cluster_issuer=${{ inputs.cluster-issuer }}" \
-          -var="app_version=${{ inputs.app-version }}"
+        helm install \
+          --namespace ${{ inputs.namespace }} \
+          --set host=${{ inputs.hostname }} \
+          --set clusterIssuer=${{ inputs.cluster-issuer }} \
+          --set version=${{ inputs.app-version }}
       shell: bash
