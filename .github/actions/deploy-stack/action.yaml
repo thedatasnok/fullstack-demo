@@ -46,8 +46,8 @@ runs:
         token: ${{ inputs.github-token }}
 
     - run: |
-        sudo update-ca-certificates
         helm install ${{ inputs.namespace}} ./helm \
+          --kube-insecure-skip-tls-verify \
           --namespace ${{ inputs.namespace }} \
           --set host=${{ inputs.hostname }} \
           --set clusterIssuer=${{ inputs.cluster-issuer }} \
